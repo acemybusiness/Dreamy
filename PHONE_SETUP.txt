@@ -1,0 +1,15 @@
+DREAMY SRL — PHONE USE
+
+1. Extract this ZIP on the Windows laptop that has ComfyUI/GPU.
+2. Run INSTALL_WINDOWS.bat once if you have not already.
+3. Start ComfyUI.
+4. Double-click START_PHONE_SERVER.bat.
+5. It prints a phone address such as:
+   http://192.168.1.25:5055
+6. Put your phone on the SAME Wi-Fi.
+7. Open that exact address in Chrome on your phone.
+8. Optional: Chrome menu > Add to Home screen.
+
+The phone is the controller/interface.
+The laptop GPU does the image generation.
+There is no paid API in this build.
