@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#090812">
+<link rel="manifest" href="/static/manifest.webmanifest">
+<title>Dreamy SRL</title>
+<style>
+:root{--bg:#07070d;--panel:#11101a;--line:#2e2940;--text:#fff;--muted:#b8afc6;--pink:#ff6fda;--violet:#9d7dff;--cyan:#69e6ff;--gold:#ffd27d;--bad:#ff8296;--good:#7ff0b1}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{min-height:100vh;background:radial-gradient(circle at 50% -15%,#2b1740 0,#0b0a13 32%,#06060a 75%)}
+.app{width:min(100%,430px);margin:0 auto;padding:10px 10px calc(22px + env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;justify-content:space-between;padding:8px 2px 10px}
+.brand{font-weight:850;font-size:20px}.srl{font-family:Georgia,serif;font-style:italic;color:var(--gold)}
+.badge{font-size:11px;padding:6px 8px;border-radius:999px;border:1px solid var(--line);background:#0d0c14;color:var(--muted)}
+.card{background:rgba(17,16,26,.95);border:1px solid var(--line);border-radius:18px;padding:12px;margin-bottom:10px}
+label{display:block;color:#d9d1e4;font-size:12px;margin:0 0 6px}
+textarea,input,select{width:100%;border:1px solid #3b3550;background:#090910;color:#fff;border-radius:12px;padding:12px;font:inherit}
+textarea{min-height:118px;resize:none;font-size:15px;line-height:1.4}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.row{margin-top:10px}
+button{border:0;width:100%;border-radius:14px;padding:14px 12px;font-weight:850;font-size:16px;color:#140f18;background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan))}
+button:disabled{opacity:.5} summary{cursor:pointer;color:#d7cfea;font-size:13px} details{margin-top:8px}
+.ok{color:var(--good)}.bad{color:var(--bad)}.msg{display:none;margin-top:9px;border-radius:12px;padding:10px;font-size:12px;line-height:1.4}
+.error{background:#2b1118;border:1px solid #6e3040;color:#ffd8df}.work{background:#20192c;border:1px solid #493962;color:#f6deff}
+.previewWrap{display:none}.preview{width:100%;display:block;border-radius:14px;border:1px solid #302a3f;background:#000}
+.meta{font-size:11px;color:var(--muted);margin:8px 2px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.actions a{display:block;text-align:center;text-decoration:none;color:#fff;background:#171522;border:1px solid #40384e;border-radius:11px;padding:10px;font-size:12px}
+.comp{display:none;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.comp img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:9px;border:1px solid #312a3f;background:#000}
+.tip,.install{font-size:11px;color:#958ca3;line-height:1.4}.install{text-align:center;padding:4px 6px 8px}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="brand">Dreamy <span class="srl">SRL</span></div><div class="badge" id="conn">connecting…</div></div>
+<section class="card">
+<label for="desc">Describe the image</label>
+<textarea id="desc">Two floating islands stacked vertically with luminous waterfalls, aurora sky, reflective water, soft pink flowers, deep violet shadows and warm gold light.</textarea>
+<div class="row row2"><div><label>Width (in)</label><input id="w" type="number" min="1" max="40" step=".01" value="8"></div><div><label>Height (in)</label><input id="h" type="number" min="1" max="40" step=".01" value="12"></div></div>
+<div class="row"><button id="make">Create Image</button><div class="msg work" id="work">Creating locally on your GPU…</div><div class="msg error" id="err"></div></div>
+<details><summary>Advanced</summary>
+<div class="row row2"><div><label>DPI</label><select id="dpi"><option>150</option><option selected>300</option><option>600</option></select></div><div><label>Seed</label><input id="seed" type="number" placeholder="random"></div></div>
+<div class="row row2"><div><label>Steps</label><input id="steps" type="number" value="28" min="12" max="60"></div><div><label>CFG</label><input id="cfg" type="number" value="6.5" min="1" max="15" step=".5"></div></div>
+<div class="row"><label><input id="components" type="checkbox" checked style="width:auto"> Create component pack</label></div>
+</details>
+<div class="tip">Width and height stay proportional. Change either one and the other adjusts automatically.</div>
+</section>
+<section class="card previewWrap" id="result">
+<img id="preview" class="preview" alt="Generated Dreamy SRL image"><div class="meta" id="meta"></div><div class="actions" id="downloads"></div>
+<details id="compDetails" style="display:none"><summary>Component images</summary><div class="comp" id="comp"></div></details>
+</section>
+<div class="install">Phone version · add this page to your Home screen for app-like use</div>
+</div>
+<script>
+const $=s=>document.querySelector(s);let ratio=8/12,busy=false;
+$('#w').addEventListener('input',()=>{if(busy)return;busy=true;const w=+$('#w').value;if(w>0)$('#h').value=(w/ratio).toFixed(2);busy=false});
+$('#h').addEventListener('input',()=>{if(busy)return;busy=true;const h=+$('#h').value;if(h>0)$('#w').value=(h*ratio).toFixed(2);busy=false});
+async function status(){try{const r=await fetch('/api/status',{cache:'no-store'});if(!r.ok)throw 0;const s=await r.json();$('#conn').textContent=s.comfy?'GPU ready':'ComfyUI offline';$('#conn').className='badge '+(s.comfy?'ok':'bad')}catch{$('#conn').textContent='server offline';$('#conn').className='badge bad'}}status();setInterval(status,5000);
+function data(){return{description:$('#desc').value.trim(),width_in:+$('#w').value,height_in:+$('#h').value,dpi:+$('#dpi').value,seed:$('#seed').value?+$('#seed').value:null,steps:+$('#steps').value,cfg:+$('#cfg').value,components:$('#components').checked,transparency:true}}
+$('#make').onclick=async()=>{const b=$('#make'),work=$('#work'),err=$('#err');b.disabled=true;work.style.display='block';err.style.display='none';$('#result').style.display='none';try{const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data())});const x=await r.json();if(!r.ok||!x.ok)throw new Error(x.error||'Generation failed');$('#preview').src=x.files.png+'?t='+Date.now();$('#meta').textContent='Seed '+x.seed;const dl=$('#downloads');dl.innerHTML='';[['PNG',x.files.png],['JPG',x.files.jpg],['PDF',x.files.pdf],['All Files',x.package]].forEach(([n,u])=>{const a=document.createElement('a');a.href=u;a.download='';a.textContent=n;dl.appendChild(a)});const g=$('#comp');g.innerHTML='';(x.components||[]).forEach(u=>{const a=document.createElement('a');a.href=u;a.download='';const i=document.createElement('img');i.src=u+'?t='+Date.now();a.appendChild(i);g.appendChild(a)});$('#compDetails').style.display=(x.components&&x.components.length)?'block':'none';g.style.display=(x.components&&x.components.length)?'grid':'none';$('#result').style.display='block';$('#result').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){err.textContent=(e.message||e)+'. Make sure the laptop server and ComfyUI are running and your phone is on the same Wi-Fi.';err.style.display='block'}finally{b.disabled=false;work.style.display='none'}};
+if('serviceWorker'in navigator)navigator.serviceWorker.register('/static/sw.js').catch(()=>{});
+</script>
+</body>
+</html>
