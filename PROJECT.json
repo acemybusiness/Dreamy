@@ -1,0 +1,14 @@
+{
+  "name": "Dreamy DoubleStack SRL",
+  "version": "1.2.0",
+  "local_only": true,
+  "paid_api_required": false,
+  "backend": "Flask",
+  "image_engine": "ComfyUI local",
+  "prompt_planner": "Ollama optional",
+  "default_url": "http://127.0.0.1:5055",
+  "size_units": "inches",
+  "aspect_ratio_locked": true,
+  "phone_first": true,
+  "phone_mode": "same-Wi-Fi controller for laptop GPU"
+}
