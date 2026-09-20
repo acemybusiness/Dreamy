@@ -1,0 +1,8 @@
+{
+  "name":"Dreamy SRL",
+  "short_name":"Dreamy SRL",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#07070c",
+  "theme_color":"#080811"
+}
