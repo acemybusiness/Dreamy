@@ -1,42 +1,83 @@
-# Dreamy SRL — Fusion Style Specification v1.4
+# Dreamy SRL — Fusion + Description-Driven Stretch Specification v1.5
 
 ## Core concept
-Dreamy is not a simple floating-island generator. Its signature is **two distinct visual ideas fused into one cohesive finished scene**.
+Dreamy creates a cohesive finished image from either:
 
-Examples of fusion logic:
-- celestial sky + terrestrial landscape
-- moonlight + reflective water
-- aurora + waterfalls
-- autumn tree + cosmic atmosphere
-- flowers + luminous nightscape
-- cloud architecture + sunset light
-- upper dream world + lower dream world
-- real landscape textures + impossible celestial forms
+1. **Fusion Mode** — two distinct ideas blended into one believable scene.
+2. **Description-Driven Stretch Mode** — one image description expanded intelligently across the full requested height.
+
+The app should never rely on a fixed list of decorative additions. The description itself drives what supporting components are added.
+
+## Description-Driven Stretch
+When the user enters one description, Dreamy should:
+
+1. Identify the primary subject(s).
+2. Identify mood, color palette, lighting, environment, motion and material cues.
+3. Determine how much vertical structure the requested aspect ratio needs.
+4. Create compatible supporting components derived from those cues.
+5. Arrange them across the height so the composition feels complete.
+6. Use transitions such as mist, reflection, cloud, light, shadow, terrain, roots, water, particles, foliage or atmospheric haze only when they fit the description.
+7. Preserve one coherent lighting direction and one harmonized palette.
+8. Avoid repeating the same object just to fill space.
+9. Avoid inserting fixed motifs such as waterfalls, moons, floating islands, flowers or auroras unless the description or visual logic supports them.
+
+### Example
+Input:
+"An anatomical heart with a glowing moon inside it above a floating pool."
+
+Possible derived supporting components:
+- lunar haze around the heart
+- reflected moonlight in the pool
+- hanging roots or organic tendrils
+- drifting mist
+- subtle celestial particles
+- dark atmospheric clouds
+- lower reflection/grounding area
+
+These additions come from the heart / moon / pool / night / glow relationships, not from a template.
+
+## Vertical planning
+Dreamy should automatically scale composition complexity to aspect ratio.
+
+Shorter vertical image:
+- primary focal area
+- transition
+- lower anchor
+
+Taller image:
+- primary focal area
+- secondary supporting feature
+- transition zone
+- tertiary visual element
+- lower anchor / reflection / foreground
+
+Very tall image:
+- use more zones, but maintain one scene and avoid a stacked-collage appearance
+
+## Fusion Mode
+Two user ideas remain recognizable, but share:
+- one lighting environment
+- one color language
+- one atmosphere
+- coherent perspective/depth
+- transitional material or light
 
 ## Visual DNA
-- near-black negative space
-- luminous gold, violet, indigo, cyan and selective pink
+- near-black negative space when appropriate
+- luminous gold, violet, indigo, cyan and selective pink when supported by the description
 - soft volumetric light
-- realistic clouds, mist, water and organic rock
-- reflective surfaces and glowing pathways
-- strong depth from foreground to distant atmosphere
+- realistic clouds, mist, water, organic rock, foliage and reflective surfaces where relevant
+- strong foreground-to-background depth
 - one dominant focal glow
 - secondary glow accents
-- high detail without visual clutter
+- high detail without clutter
 - dreamlike photoreal / painterly finish
-- vertical compositions favored
-- cohesive light direction across both ideas
-
-## Fusion rules
-1. Idea One and Idea Two must each remain recognizable.
-2. They should share one lighting environment.
-3. Their color palettes must be harmonized.
-4. Transitions should happen through mist, reflection, cloud, water, light, shadow, terrain or atmosphere.
-5. Avoid collage seams or obviously pasted-together halves.
-6. Avoid literal duplication of reference compositions.
-7. Generate new geometry, new object placement and new focal arrangements for every image.
+- cohesive vertical storytelling
 
 ## Composition modes
+- Auto
+- Fusion
+- Description Stretch
 - Double Stack
 - Portal Merge
 - Reflection Merge
@@ -46,7 +87,10 @@ Examples of fusion logic:
 
 ## Output
 - master image
-- component assets
+- component assets derived from the scene plan
 - SRL signature
-- prompt + seed + engine manifest
+- prompt / scene plan / seed / engine manifest
 - PNG / JPG / WEBP / PDF
+
+## Non-copy rule
+Reference images define only high-level visual qualities and quality targets. Dreamy should generate new geometry, new layouts, new object relationships, and new focal arrangements rather than reproducing a supplied reference composition.
