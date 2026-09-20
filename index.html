@@ -3,153 +3,173 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#080811">
+<meta name="theme-color" content="#090812">
 <link rel="manifest" href="./manifest.webmanifest">
-<title>Dreamy SRL — Phone Test</title>
+<title>Dreamy SRL v1.5</title>
 <style>
-:root{--bg:#07070c;--panel:#11101a;--line:#302a41;--text:#fff;--muted:#bdb4ca;--gold:#ffd27d;--pink:#ff78dc;--violet:#9f82ff;--cyan:#71e7ff}
+:root{--bg:#07070c;--panel:#11101a;--line:#302a41;--text:#fff;--muted:#bdb4ca;--gold:#ffd27d;--pink:#ff78dc;--violet:#9f82ff;--cyan:#71e7ff;--good:#80efb2}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 body{min-height:100vh;background:radial-gradient(circle at 50% -10%,#29183f 0,#0c0a14 32%,#06060a 76%)}
 .app{width:min(100%,430px);margin:0 auto;padding:10px 10px calc(24px + env(safe-area-inset-bottom))}
 .top{display:flex;justify-content:space-between;align-items:center;padding:8px 2px 10px}.brand{font-size:20px;font-weight:850}.srl{font-family:Georgia,serif;font-style:italic;color:var(--gold)}
-.badge{font-size:11px;color:#bff6d0;border:1px solid #315540;background:#0d1711;border-radius:999px;padding:6px 8px}
+.badge{font-size:11px;color:var(--good);border:1px solid #315540;background:#0d1711;border-radius:999px;padding:6px 8px}
 .card{background:rgba(17,16,26,.96);border:1px solid var(--line);border-radius:18px;padding:12px;margin-bottom:10px}
 label{display:block;color:#ddd4e8;font-size:12px;margin:0 0 6px}
-textarea,input{width:100%;border:1px solid #3c3550;background:#090910;color:#fff;border-radius:12px;padding:12px;font:inherit;outline:none}
-textarea{min-height:112px;resize:none;font-size:15px;line-height:1.4}
+textarea,input,select{width:100%;border:1px solid #3c3550;background:#090910;color:#fff;border-radius:12px;padding:12px;font:inherit;outline:none}
+textarea{min-height:104px;resize:none;font-size:15px;line-height:1.4}
 .row{margin-top:10px}.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 button{width:100%;border:0;border-radius:14px;padding:14px 12px;font-weight:850;font-size:16px;color:#140f18;background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan))}
 button.alt{background:#171522;color:#fff;border:1px solid #453d5a;font-size:13px;padding:11px}
-.preview{width:100%;display:none;border-radius:14px;border:1px solid #302a3f;background:#000}
-.actions{display:none;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.actions button{font-size:12px;padding:10px;background:#171522;color:#fff;border:1px solid #423a52}
-details{margin-top:10px}summary{color:#d8cfea;font-size:13px;cursor:pointer}.tip{font-size:11px;color:#9d93aa;line-height:1.45;margin-top:8px}
-.components{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.comp{border:1px solid #332d42;border-radius:10px;padding:6px;background:#0a0910}.comp canvas{width:100%;aspect-ratio:1/1;display:block;border-radius:7px;background:transparent}.comp button{margin-top:6px;font-size:11px;padding:8px}
+.plan{display:none}.section{padding:10px 0;border-top:1px solid #272235}.section:first-child{border-top:0;padding-top:0}.title{font-size:12px;color:var(--gold);font-weight:800;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}.value{font-size:14px;line-height:1.45;color:#eee8f5}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{font-size:11px;border:1px solid #473d5e;background:#171522;border-radius:999px;padding:6px 8px;color:#e8def5}
+.zones{display:grid;gap:7px}.zone{border:1px solid #332d42;border-radius:12px;padding:9px;background:#0b0a11}.zone b{display:block;font-size:12px;color:#f6d9ff;margin-bottom:3px}.zone span{font-size:12px;line-height:1.4;color:#c8bfd1}
+.promptBox{white-space:pre-wrap;background:#090910;border:1px solid #353048;border-radius:12px;padding:10px;font-size:12px;line-height:1.45;color:#ddd4e8}
+.tip{font-size:11px;color:#9d93aa;line-height:1.45;margin-top:8px}
 footer{text-align:center;color:#7e7589;font-size:10px;padding:2px 0 8px}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top"><div class="brand">Dreamy <span class="srl">SRL</span></div><div class="badge">PHONE READY</div></div>
+  <div class="top"><div class="brand">Dreamy <span class="srl">SRL</span></div><div class="badge">v1.5 PLANNER</div></div>
 
   <section class="card">
-    <label for="prompt">Describe your scene</label>
-    <textarea id="prompt">Two floating islands stacked vertically with luminous waterfalls, aurora sky, reflective water, soft pink flowers, deep violet shadows and warm gold light.</textarea>
+    <label for="idea1">Describe your image</label>
+    <textarea id="idea1">An anatomical heart with a glowing moon inside it above a floating pool.</textarea>
+
+    <div class="row">
+      <label for="idea2">Optional second idea</label>
+      <textarea id="idea2" style="min-height:76px" placeholder="Leave blank for Description-Driven Stretch. Add a second idea for Fusion Mode."></textarea>
+    </div>
 
     <div class="row row2">
       <div><label>Width (in)</label><input id="w" type="number" value="8" min="1" max="40" step=".01"></div>
       <div><label>Height (in)</label><input id="h" type="number" value="12" min="1" max="40" step=".01"></div>
     </div>
 
-    <div class="row"><button id="create">Create Dreamy Image</button></div>
-    <div class="tip">This phone-test build runs entirely in your browser. No laptop, ComfyUI, paid API, or server is required. Width and height stay proportionally locked.</div>
+    <div class="row"><button id="build">Build Dream Plan</button></div>
+    <div class="tip">This version tests how Dreamy interprets your description and stretches or fuses it before the real image engine is connected.</div>
   </section>
 
-  <section class="card">
-    <canvas id="main" class="preview" width="1200" height="1800"></canvas>
-    <div class="actions" id="actions">
-      <button data-type="png">Download PNG</button>
-      <button data-type="jpeg">Download JPG</button>
-      <button data-type="webp">Download WEBP</button>
-      <button id="pdf">Download PDF</button>
-    </div>
-
-    <details id="parts" style="display:none">
-      <summary>Image components</summary>
-      <div class="components" id="components"></div>
-    </details>
+  <section class="card plan" id="plan">
+    <div class="section"><div class="title">Mode</div><div class="value" id="mode"></div></div>
+    <div class="section"><div class="title">Core concept</div><div class="value" id="core"></div></div>
+    <div class="section"><div class="title">Visual language</div><div class="chips" id="visual"></div></div>
+    <div class="section"><div class="title">Derived components</div><div class="chips" id="components"></div></div>
+    <div class="section"><div class="title">Vertical composition</div><div class="zones" id="zones"></div></div>
+    <div class="section"><div class="title">Final generation prompt</div><div class="promptBox" id="finalPrompt"></div><div class="row"><button class="alt" id="copy">Copy Prompt</button></div></div>
   </section>
 
-  <footer>Dreamy SRL Phone Test v1.3 · original procedural generation · SRL marked</footer>
+  <footer>Dreamy SRL v1.5 · Description-Driven Stretch + Fusion planner</footer>
 </div>
+
 <script>
 const $=s=>document.querySelector(s);
-let ratio=8/12,busy=false,lastPrompt='',lastSeed=0;
-const main=$('#main'),ctx=main.getContext('2d');
-const componentCanvases={};
-
-function hash(str){let h=2166136261>>>0;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
-function rng(seed){let a=seed>>>0;return()=>{a+=0x6D2B79F5;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
-function lerp(a,b,t){return a+(b-a)*t}
-function colorMix(a,b,t){return 'rgb('+Math.round(lerp(a[0],b[0],t))+','+Math.round(lerp(a[1],b[1],t))+','+Math.round(lerp(a[2],b[2],t))+')'}
-function keyword(prompt,words){prompt=prompt.toLowerCase();return words.some(w=>prompt.includes(w))}
-function fit(){const w=+$('input#w').value,h=+$('#h').value;const r=w/h;let W=1200,H=Math.round(W/r);if(H>2200){H=2200;W=Math.round(H*r)}main.width=W;main.height=H}
+let ratio=8/12,busy=false;
 $('#w').addEventListener('input',()=>{if(busy)return;busy=true;const w=+$('#w').value;if(w>0)$('#h').value=(w/ratio).toFixed(2);busy=false});
 $('#h').addEventListener('input',()=>{if(busy)return;busy=true;const h=+$('#h').value;if(h>0)$('#w').value=(h*ratio).toFixed(2);busy=false});
 
-function drawSky(g,W,H,r,prompt){
-  const grad=g.createLinearGradient(0,0,0,H);grad.addColorStop(0,'#050611');grad.addColorStop(.45,'#10102a');grad.addColorStop(1,'#050509');g.fillStyle=grad;g.fillRect(0,0,W,H);
-  const stars=180;for(let i=0;i<stars;i++){const x=r()*W,y=r()*H*.72,s=.5+r()*2.2,a=.25+r()*.7;g.fillStyle='rgba(255,255,255,'+a+')';g.beginPath();g.arc(x,y,s,0,Math.PI*2);g.fill()}
-  const auroraColors=keyword(prompt,['pink','rose','magenta'])?['rgba(255,110,220,.20)','rgba(92,235,255,.18)','rgba(165,125,255,.17)']:['rgba(90,232,255,.18)','rgba(150,110,255,.18)','rgba(255,208,120,.12)'];
-  for(let band=0;band<5;band++){g.save();g.globalCompositeOperation='screen';g.strokeStyle=auroraColors[band%auroraColors.length];g.lineWidth=W*(.035+r()*.03);g.filter='blur('+Math.round(W*.018)+'px)';g.beginPath();for(let x=-W*.1;x<=W*1.1;x+=W/30){const y=H*(.08+band*.035)+Math.sin(x/W*7+band*1.3)*H*(.03+r()*.02)+x*.04;if(x<-W*.09)g.moveTo(x,y);else g.lineTo(x,y)}g.stroke();g.restore()}
+const groups={
+ celestial:['moon','sun','star','stars','planet','eclipse','galaxy','cosmic','celestial','aurora','nebula','sky'],
+ water:['water','pool','lake','ocean','river','reflection','waterfall','falls','stream','pond'],
+ organic:['heart','tree','flower','flowers','blossom','roots','vine','vines','forest','moss','garden'],
+ atmospheric:['mist','fog','cloud','clouds','haze','smoke','storm'],
+ luminous:['glow','glowing','light','luminous','gold','golden','sparkle','sparkling','radiant','neon'],
+ dark:['dark','black','night','midnight','shadow','shadows'],
+ pink:['pink','rose','magenta','blush'],
+ purple:['purple','violet','indigo','lavender'],
+ blue:['blue','cyan','teal','turquoise'],
+ warm:['gold','golden','amber','orange','sunset','warm'],
+ surreal:['floating','impossible','dream','dreamy','surreal','fantasy','portal']
+};
+
+function words(s){return s.toLowerCase().match(/[a-z]+/g)||[]}
+function has(text,list){const t=' '+text.toLowerCase()+' ';return list.some(x=>t.includes(' '+x+' '))}
+function detect(text){
+  const found={};
+  for(const [k,v] of Object.entries(groups)) found[k]=has(text,v);
+  return found;
 }
-function islandPath(g,cx,cy,w,h,r,flip=false){
-  g.beginPath();g.moveTo(cx-w*.45,cy);
-  const topPts=8;for(let i=0;i<=topPts;i++){const t=i/topPts;const x=cx-w*.45+t*w*.9;const y=cy-Math.sin(t*Math.PI)*h*(.13+r()*.12)+ (r()-.5)*h*.06;g.lineTo(x,y)}
-  const right=cx+w*.45;g.lineTo(right,cy+h*.04);
-  for(let i=0;i<7;i++){const t=i/6;const x=lerp(right,cx,t);const y=cy+h*(.12+t*.78)+(r()-.5)*h*.11;g.lineTo(x,y)}
-  for(let i=0;i<7;i++){const t=i/6;const x=lerp(cx,cx-w*.45,t);const y=cy+h*(.9-t*.78)+(r()-.5)*h*.11;g.lineTo(x,y)}
-  g.closePath();
+function unique(arr){return [...new Set(arr.filter(Boolean))]}
+
+function deriveComponents(text,traits){
+  const c=[];
+  if(traits.celestial)c.push('celestial atmosphere','soft halo light','distant star field');
+  if(traits.water)c.push('reflected light','water ripples','lower reflective anchor');
+  if(traits.organic)c.push('organic silhouettes','natural texture accents');
+  if(traits.atmospheric)c.push('mist transition','layered haze');
+  if(traits.luminous)c.push('secondary glow accents','light spill');
+  if(traits.dark)c.push('deep negative space','shadow framing');
+  if(traits.surreal)c.push('impossible spatial transition','dreamlike depth');
+  if(traits.pink)c.push('selective pink highlights');
+  if(traits.purple)c.push('violet atmosphere');
+  if(traits.blue)c.push('cool blue depth');
+  if(traits.warm)c.push('warm gold focal light');
+  if(!c.length)c.push('depth atmosphere','foreground anchor','secondary texture','light transition');
+  return unique(c).slice(0,9);
 }
-function drawIsland(g,W,H,r,cx,cy,w,h,prompt,upper=false){
-  g.save();islandPath(g,cx,cy,w,h,r);const rock=g.createLinearGradient(cx,cy,cx,cy+h);rock.addColorStop(0,'#323044');rock.addColorStop(.35,'#171726');rock.addColorStop(1,'#08080f');g.fillStyle=rock;g.shadowColor='rgba(120,120,255,.25)';g.shadowBlur=w*.05;g.fill();g.shadowBlur=0;
-  g.strokeStyle='rgba(160,175,220,.18)';g.lineWidth=2;for(let i=0;i<24;i++){const x=cx+(r()-.5)*w*.7,y=cy+r()*h*.75;g.beginPath();g.moveTo(x,y);g.lineTo(x+(r()-.5)*w*.12,y+r()*h*.13);g.stroke()}
-  g.fillStyle='#253526';g.beginPath();g.ellipse(cx,cy-h*.02,w*.4,h*.08,0,0,Math.PI*2);g.fill();
-  const glow=keyword(prompt,['pink','flower','blossom'])?'#ff9ae2':'#c7a2ff';
-  for(let i=0;i<45;i++){const x=cx+(r()-.5)*w*.65,y=cy-h*.05+(r()-.5)*h*.08;g.fillStyle=i%3?glow:'#7fe9ff';g.globalAlpha=.45+r()*.45;g.beginPath();g.arc(x,y,1+r()*3,0,Math.PI*2);g.fill()}g.globalAlpha=1;
-  if(upper){const tx=cx-w*.08,ty=cy-h*.16;g.strokeStyle='#5a3a39';g.lineWidth=w*.018;g.beginPath();g.moveTo(tx,cy-h*.01);g.lineTo(tx,ty);g.stroke();g.strokeStyle=glow;g.lineWidth=w*.01;for(let i=0;i<16;i++){const a=r()*Math.PI*2,len=w*(.04+r()*.12);g.beginPath();g.moveTo(tx,ty);g.lineTo(tx+Math.cos(a)*len,ty+Math.sin(a)*len*.55);g.stroke()}}
-  g.restore();
+
+function visualLanguage(traits){
+  const v=['cohesive lighting','cinematic depth','dreamlike photoreal finish'];
+  if(traits.dark)v.push('near-black negative space');
+  if(traits.luminous)v.push('volumetric glow');
+  if(traits.atmospheric)v.push('mist and haze');
+  if(traits.water)v.push('reflective surfaces');
+  if(traits.pink)v.push('pink accents');
+  if(traits.purple)v.push('violet/indigo tones');
+  if(traits.blue)v.push('cool cyan/blue tones');
+  if(traits.warm)v.push('warm gold highlights');
+  return unique(v);
 }
-function drawWaterfall(g,W,H,r,x,y,len,width){
-  g.save();const grd=g.createLinearGradient(x-width/2,y,x+width/2,y);grd.addColorStop(0,'rgba(90,180,255,0)');grd.addColorStop(.35,'rgba(170,230,255,.7)');grd.addColorStop(.52,'rgba(255,255,255,.95)');grd.addColorStop(.72,'rgba(105,190,255,.65)');grd.addColorStop(1,'rgba(80,160,255,0)');g.fillStyle=grd;g.filter='blur(1px)';g.beginPath();g.moveTo(x-width/2,y);for(let i=1;i<=12;i++){const t=i/12;g.lineTo(x-width/2+Math.sin(t*8+r()*2)*width*.18,y+t*len)}for(let i=12;i>=0;i--){const t=i/12;g.lineTo(x+width/2+Math.sin(t*7+r()*2)*width*.15,y+t*len)}g.closePath();g.fill();g.restore()
+
+function buildZones(text,ratio,traits){
+  let count=3;
+  if(ratio<0.72)count=4;
+  if(ratio<0.58)count=5;
+  const derived=deriveComponents(text,traits);
+  const zones=[];
+  zones.push(['Top focal','Primary subject and strongest visual statement from the description.']);
+  if(count>=4)zones.push(['Upper support',derived[0]+' with '+derived[1]+'.']);
+  zones.push(['Middle transition',(traits.atmospheric?'Mist, haze, light and depth':'Light, shadow and environmental depth')+' connect the composition without a collage seam.']);
+  if(count>=5)zones.push(['Lower support',derived[2]+' and '+derived[3]+' derived from the same scene language.']);
+  zones.push(['Lower anchor',(traits.water?'Reflection and grounded water detail':'Foreground/environmental anchor')+' finish the image and carry the same lighting downward.']);
+  return zones;
 }
-function drawReflection(g,W,H,r,prompt){
-  const y=H*.83;const grd=g.createRadialGradient(W*.5,y,10,W*.5,y,W*.44);grd.addColorStop(0,'rgba(255,211,126,.32)');grd.addColorStop(.35,'rgba(120,118,255,.17)');grd.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=grd;g.beginPath();g.ellipse(W*.5,y,W*.42,H*.08,0,0,Math.PI*2);g.fill();
-  for(let i=0;i<42;i++){const yy=y+(r()-.5)*H*.09;const ww=W*(.08+r()*.48);g.strokeStyle=i%3?'rgba(133,166,255,.13)':'rgba(255,215,135,.18)';g.lineWidth=1+r()*2;g.beginPath();g.moveTo(W*.5-ww/2,yy);g.lineTo(W*.5+ww/2,yy);g.stroke()}
+
+function buildPlan(){
+  const a=$('#idea1').value.trim();
+  const b=$('#idea2').value.trim();
+  if(!a){alert('Add an image description first.');return}
+  const all=b?(a+' '+b):a;
+  const t=detect(all);
+  const mode=b?'Fusion Mode':'Description-Driven Stretch';
+  $('#mode').textContent=mode;
+  $('#core').textContent=b?('Blend “'+a+'” with “'+b+'” into one continuous scene without obvious halves.'):('Expand “'+a+'” vertically using only supporting elements that naturally follow from the description.');
+  const vis=visualLanguage(t);$('#visual').innerHTML=vis.map(x=>'<span class="chip">'+x+'</span>').join('');
+  const comps=deriveComponents(all,t);$('#components').innerHTML=comps.map(x=>'<span class="chip">'+x+'</span>').join('');
+  const r=(+$('#w').value)/(+$('#h').value);
+  const zones=buildZones(all,r,t);$('#zones').innerHTML=zones.map(z=>'<div class="zone"><b>'+z[0]+'</b><span>'+z[1]+'</span></div>').join('');
+  const palette=[
+    t.pink?'selective pink':'',
+    t.purple?'violet/indigo':'',
+    t.blue?'cyan/blue':'',
+    t.warm?'warm gold':''
+  ].filter(Boolean).join(', ') || 'a palette derived from the described scene';
+  const prompt=(b
+    ? 'Create a completely original vertical dreamscape that fuses these two ideas: '+a+' + '+b+'. '
+    : 'Create a completely original vertical dreamscape based on this description: '+a+'. ')
+    +'Extend the concept naturally across the full '+$('#w').value+' x '+$('#h').value+' inch composition. '
+    +'Do not fill space with unrelated stock motifs. Derive all secondary elements from the subjects, mood, environment, materials and lighting already implied by the description. '
+    +'Use '+palette+', cohesive light direction, cinematic depth, soft volumetric atmosphere, realistic organic texture, strong foreground-to-background separation, one dominant focal glow and secondary supporting accents. '
+    +'Build the image as a continuous scene rather than stacked panels or a collage. '
+    +(b?'Keep both ideas recognizable while blending them through atmosphere, light, terrain, reflection or other context-appropriate transitions. ':'Add supporting components only where they logically strengthen the original concept. ')
+    +'Avoid reproducing any reference composition; create new geometry, placement and relationships. Add a subtle SRL signature in the lower-right corner.';
+  $('#finalPrompt').textContent=prompt;
+  $('#plan').style.display='block';
+  $('#plan').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function drawMist(g,W,H,r){
-  g.save();g.globalCompositeOperation='screen';g.filter='blur('+Math.round(W*.018)+'px)';for(let i=0;i<18;i++){const x=r()*W,y=H*(.22+r()*.68),rx=W*(.05+r()*.16),ry=H*(.008+r()*.025);g.fillStyle='rgba(160,150,255,'+(.025+r()*.08)+')';g.beginPath();g.ellipse(x,y,rx,ry,r()*.4,0,Math.PI*2);g.fill()}g.restore()
-}
-function mark(g,W,H){
-  g.save();g.font='italic bold '+Math.max(24,Math.round(W*.042))+'px Georgia';g.textAlign='right';g.textBaseline='bottom';g.shadowColor='rgba(0,0,0,.8)';g.shadowBlur=8;g.fillStyle='rgba(255,239,205,.78)';g.fillText('SRL',W*.965,H*.972);g.restore()
-}
-function generate(seed,prompt,targetCtx=ctx,W=main.width,H=main.height,mode='all'){
-  const r=rng(seed);targetCtx.clearRect(0,0,W,H);
-  if(mode==='all'||mode==='sky')drawSky(targetCtx,W,H,r,prompt);
-  if(mode!=='all'&&mode!=='sky')targetCtx.clearRect(0,0,W,H);
-  if(mode==='upper'){drawIsland(targetCtx,W,H,r,W*.5,H*.22,W*.52,H*.19,prompt,true)}
-  if(mode==='lower'){drawIsland(targetCtx,W,H,r,W*.5,H*.52,W*.72,H*.27,prompt,false)}
-  if(mode==='waterfalls'){for(let i=0;i<6;i++)drawWaterfall(targetCtx,W,H,r,W*(.34+r()*.32),H*(.20+r()*.40),H*(.18+r()*.25),W*(.015+r()*.025))}
-  if(mode==='reflection'){drawReflection(targetCtx,W,H,r,prompt)}
-  if(mode==='foreground'){drawMist(targetCtx,W,H,r);for(let i=0;i<80;i++){targetCtx.fillStyle=i%2?'rgba(255,130,220,.55)':'rgba(112,230,255,.5)';targetCtx.beginPath();targetCtx.arc(r()*W,H*(.72+r()*.23),1+r()*4,0,Math.PI*2);targetCtx.fill()}}
-  if(mode==='all'){
-    drawIsland(targetCtx,W,H,r,W*.5,H*.22,W*.52,H*.19,prompt,true);
-    drawIsland(targetCtx,W,H,r,W*.5,H*.52,W*.72,H*.27,prompt,false);
-    for(let i=0;i<3;i++)drawWaterfall(targetCtx,W,H,r,W*(.43+i*.07),H*.22,H*(.24+r()*.10),W*(.018+r()*.018));
-    for(let i=0;i<5;i++)drawWaterfall(targetCtx,W,H,r,W*(.35+i*.075),H*.52,H*(.24+r()*.14),W*(.018+r()*.024));
-    drawReflection(targetCtx,W,H,r,prompt);drawMist(targetCtx,W,H,r);mark(targetCtx,W,H)
-  } else if(mode!=='sky') mark(targetCtx,W,H)
-}
-function buildComponents(seed,prompt){
-  const holder=$('#components');holder.innerHTML='';const modes=[['Sky','sky'],['Upper Island','upper'],['Lower Island','lower'],['Waterfalls','waterfalls'],['Reflection','reflection'],['Foreground','foreground']];
-  modes.forEach(([name,mode],i)=>{const c=document.createElement('canvas');c.width=700;c.height=700;generate(seed+i*17,prompt,c.getContext('2d'),700,700,mode);componentCanvases[mode]=c;const wrap=document.createElement('div');wrap.className='comp';wrap.appendChild(c);const b=document.createElement('button');b.textContent='Download '+name;b.onclick=()=>downloadCanvas(c,'Dreamy_SRL_'+mode+'.png','image/png');wrap.appendChild(b);holder.appendChild(wrap)})
-}
-function downloadCanvas(c,name,type,quality=.95){c.toBlob(blob=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)},type,quality)}
-function makePDF(){
-  const jpeg=main.toDataURL('image/jpeg',.94).split(',')[1];const bin=atob(jpeg);const W=main.width,H=main.height;const parts=[];const offsets=[];let pos=0;
-  const add=s=>{parts.push(s);pos+=s.length};add('%PDF-1.4\n');
-  const obj=(n,s)=>{offsets[n]=pos;add(n+' 0 obj\n'+s+'\nendobj\n')};
-  obj(1,'<< /Type /Catalog /Pages 2 0 R >>');obj(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
-  obj(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+W+' '+H+'] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');
-  offsets[4]=pos;add('4 0 obj\n<< /Type /XObject /Subtype /Image /Width '+W+' /Height '+H+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+bin.length+' >>\nstream\n');parts.push(bin);pos+=bin.length;add('\nendstream\nendobj\n');
-  const content='q '+W+' 0 0 '+H+' 0 0 cm /Im0 Do Q';obj(5,'<< /Length '+content.length+' >>\nstream\n'+content+'\nendstream');
-  const xref=pos;add('xref\n0 6\n0000000000 65535 f \n');for(let i=1;i<=5;i++)add(String(offsets[i]).padStart(10,'0')+' 00000 n \n');add('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF');
-  const arr=new Uint8Array(pos);let k=0;for(const p of parts){for(let i=0;i<p.length;i++)arr[k++]=p.charCodeAt(i)&255}const blob=new Blob([arr],{type:'application/pdf'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Dreamy_SRL.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)
-}
-$('#create').onclick=()=>{fit();lastPrompt=$('#prompt').value.trim();lastSeed=(hash(lastPrompt+'|'+Date.now()+'|'+Math.random())||1)>>>0;generate(lastSeed,lastPrompt);main.style.display='block';$('#actions').style.display='grid';$('#parts').style.display='block';buildComponents(lastSeed,lastPrompt);main.scrollIntoView({behavior:'smooth',block:'start'})};
-document.querySelectorAll('#actions button[data-type]').forEach(b=>b.onclick=()=>{const t=b.dataset.type;downloadCanvas(main,'Dreamy_SRL.'+(t==='jpeg'?'jpg':t),'image/'+t,.96)});
-$('#pdf').onclick=makePDF;
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+$('#build').onclick=buildPlan;
+$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText($('#finalPrompt').textContent);$('#copy').textContent='Copied';setTimeout(()=>$('#copy').textContent='Copy Prompt',1200)}catch{alert('Press and hold the prompt to copy it.')}};
 </script>
 </body>
 </html>
